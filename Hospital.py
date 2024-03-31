@@ -148,10 +148,10 @@ class Patient:
                 hospital = Hospital()
             else:
                 print("\nENTER A VALID CHOICE!")
-                pat = Patient()
+                self.__init__()
         except ValueError:
             print("\nENTER A VALID CHOICE!")
-            pat = Patient()
+            self.__init__()
 
     def register_patient(self):
         patient_name = input("Enter patient's full name: ")
@@ -244,10 +244,10 @@ class Patient:
             mycursor = mydb.cursor()
             query = "SELECT * FROM `hospital`.`doctor`"
             mycursor.execute(query)
-            myresult = mycursor.fetchall()
+            mydocresult = mycursor.fetchall()
             print("\nDoctors:")
-            for index, doctor in enumerate(myresult):
-                print(f"{index+1}. {doctor[0]} ,{doctor[1]}, Available: {doctor[2]}")
+            for index, doctor in enumerate(mydocresult):
+                print(f"{index+1}. {doctor[0]}, {doctor[1]}, Available: {doctor[2]}")
 
             try:
                 choose_doctor = int(
@@ -255,22 +255,26 @@ class Patient:
                         "\nEnter the index number of doctor to select them for appointment: "
                     )
                 )
-                if choose_doctor > len(list(enumerate(myresult))):
+                if choose_doctor > len(list(enumerate(mydocresult))):
                     print("Invalid choice")
                     self.appointment_schedule()
                 else:
-                    appointment_date = check_day(doctor[2])
-                    appointment_time = input(
-                        "Enter the time you want to select for appointment: "
+                    appointment_date = checkDay(list(enumerate(mydocresult))[choose_doctor - 1][1][2])
+                    appointment_time = validate_time()
+                    doctor_name = list(enumerate(mydocresult))[choose_doctor - 1][1][0]
+                    mycursor = mydb.cursor()
+                    query = "INSERT INTO `hospital`.`appointment` (`patient_name`,`patient_phone`,`doctor_name`,`appointment_date`,`appointment_time`) VALUES (%s,%s,%s,%s,%s)"
+                    values = (
+                        myresult[0],
+                        myresult[3],
+                        doctor_name,
+                        appointment_date,
+                        appointment_time,
                     )
-
-                    # mycursor = mydb.cursor()
-                    # query = "INSERT INTO `hospital`.`appointment` (`appointment_date`,`appointment_time`,`appointment_doctor`,`appointment_patient`) VALUES (%s,%s,%s,%s)"
-                    # values = (datetime.now().strftime("%Y-%m-%d"),datetime.now().strftime("%H:%M:%S"),choose_doctor,patient_num)
-                    # mycursor.execute(query, values)
-                    # mydb.commit()
-                    # print("Appointment Scheduled Successfully!")
-                    # self.__init__()
+                    mycursor.execute(query, values)
+                    mydb.commit()
+                    print("Appointment Scheduled Successfully!")
+                    self.__init__()
             except ValueError:
                 print("Invalid choice")
                 self.appointment_schedule()
@@ -330,28 +334,50 @@ def validate_mobile_no(mobile_no):
     return mobile_no
 
 
-hospital = Hospital()
-
-
+# Validate Date
 def validate_date(dates):
     while True:
         # initializing format
         format = "%Y-%m-%d"
+        f_date = dates.split("-")
         # using try-except to check for truth value
         try:
             datetime.strptime(dates, format)
+
+            if (
+                date(int(f_date[0]), int(f_date[1]), int(f_date[2])) - date.today()
+            ).days < 0:
+                print("Cannot schedule appointment for past date")
+                raise Exception
             break
 
         except:
             print("Wrong Date!")
-            dates = input("Enter Date: ")
+            dates = input("\nEnter Date (yyyy-mm-dd): ")
     return dates
 
 
-def check_day(available_day):
-    init_date = input("Enter Date: ")
+# Check availability of doctor
+def checkDay(available_day):
+    init_date = input("\nEnter Date (yyyy-mm-dd): ")
     dates = validate_date(init_date)
     year, month, day = dates.split("-")
     selected_day = date(int(year), int(month), int(day)).strftime("%A")
-    if available_day in selected_day:
-        print(available_day)
+    if selected_day[:3].lower() in available_day.lower():
+        return dates
+    else:
+        print("Doctor not available on selected date! Please choose another date.")
+        return checkDay(available_day)
+
+
+def validate_time():
+    time = input("\nEnter time for the appointment (HH:MM):")
+    try:
+        datetime.strptime(time, "%H:%M")
+        return time
+    except:
+        print("Invalid Time Format!\nPlease enter in HH:MM format.")
+        return validate_time()
+
+
+hospital = Hospital()
