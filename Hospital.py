@@ -8,6 +8,9 @@ Title: Hospital Database Management
 Subject: FCSP-1
 Enrollment No. : 23002170120001
 
+Ref:
+1. https://www.geeksforgeeks.org/python-datetime-module/
+2. https://www.w3schools.com/python/python_mysql_getstarted.asp
 
 --------------------------------------------------------------------------
 """
@@ -33,17 +36,17 @@ class Hospital:
         try:
             data = int(input("\nChoose the data you want to work with: "))
             if data == 1:
-                patient = Patient()
+                Patient()
             elif data == 2:
-                doc = Doctor()
+                Doctor()
             elif data == 3:
-                exit()
+                pass
             else:
                 print("\nENTER A VALID CHOICE!")
-                hosp = Hospital()
+                self.__init__()
         except ValueError:
             print("\nENTER A VALID CHOICE!")
-            hosp = Hospital()
+            self.__init__()
 
 
 # ------------------------------------------------------------------------#
@@ -62,13 +65,13 @@ class Doctor:
             elif doc_choice == 2:
                 self.display_doctor()
             elif doc_choice == 3:
-                hospital = Hospital()
+                Hospital()
             else:
                 print("\nENTER A VALID CHOICE!")
-                doc = Doctor()
+                self.__init__()
         except ValueError:
             print("\nENTER A VALID CHOICE!")
-            doc = Doctor()
+            self.__init__()
 
     def register_doctor(self):
         doc_name = input("Enter name of doctor: ")
@@ -145,7 +148,7 @@ class Patient:
             elif pat_choice == 3:
                 self.appointment_schedule()
             elif pat_choice == 4:
-                hospital = Hospital()
+                Hospital()
             else:
                 print("\nENTER A VALID CHOICE!")
                 self.__init__()
@@ -211,7 +214,35 @@ class Patient:
                 f"Name: {myresult[0]}\nDOB: {myresult[1]}\nAddress: {myresult[2]}\nPhone No.: {myresult[3]}\ne-Mail: {myresult[4]}"
             )
             print("---------------------------------------------------\n")
+
+            cursor = mydb.cursor()
+            query = "SELECT * FROM `hospital`.`appointment` WHERE `patient_phone` = %s"
+            cursor.execute(query, patient_num)
+            app = cursor.fetchall()
+            if app:
+                print("---------------------------------------------------")
+                print("APPOINTMENTS")
+                print("---------------------------------------------------")
+                check = False
+                for index, appointment in enumerate(app):
+                    if appointment[3] >= date.today():
+                        print(
+                            f"\nName: {appointment[0]}\nDoctor: {appointment[2]}\nDate: {appointment[3]}\nTime: {appointment[4]}\n"
+                        )
+                        check = True
+
+                if check is False:
+                    print("No upcoming appointments scheduled for this patient.")
+                    print("---------------------------------------------------\n")
+                else:
+                    print("---------------------------------------------------\n")
+
+            else:
+                print("No appointments scheduled for this patient.")
+                print("---------------------------------------------------\n")
+
             self.__init__()
+
         else:
             while True:
                 choice = input(
@@ -259,7 +290,9 @@ class Patient:
                     print("Invalid choice")
                     self.appointment_schedule()
                 else:
-                    appointment_date = checkDay(list(enumerate(mydocresult))[choose_doctor - 1][1][2])
+                    appointment_date = checkDay(
+                        list(enumerate(mydocresult))[choose_doctor - 1][1][2]
+                    )
                     appointment_time = validate_time()
                     doctor_name = list(enumerate(mydocresult))[choose_doctor - 1][1][0]
                     mycursor = mydb.cursor()
@@ -380,4 +413,4 @@ def validate_time():
         return validate_time()
 
 
-hospital = Hospital()
+Hospital()

@@ -1,0 +1,114 @@
+---------------------------------------------------
+MAIN MENU
+---------------------------------------------------
+
+1. Patient
+2. Doctor
+3. Exit
+
+Choose the data you want to work with: 1
+
+---------------------------------------------------
+PATIENT MENU
+---------------------------------------------------
+
+1. Register New Patient
+2. Search Patient
+3. Schedule Appointment
+4. Return to main menu
+
+Enter your selection: 1
+Enter patient's full name: Test New
+Enter Date of Birth (yyyy-mm-dd): 2005-05-15
+Enter Address: 123 New, Abad
+Enter valid 10-digit Mobile number containing only digits: 7059945294
+Enter email ID: testnew@test.com
+Record Added Successfully!
+
+---------------------------------------------------
+PATIENT MENU
+---------------------------------------------------
+
+1. Register New Patient
+2. Search Patient
+3. Schedule Appointment
+4. Return to main menu
+
+Enter your selection: 2
+Enter the mobile number of patient: 7059945294
+
+---------------------------------------------------
+Patient Details:
+
+Name: Test New
+DOB: 2005-05-15
+Address: 123 New, Abad
+Phone No.: 7059945294
+e-Mail: testnew@test.com
+---------------------------------------------------
+
+No appointments scheduled for this patient.
+---------------------------------------------------
+
+
+---------------------------------------------------
+PATIENT MENU
+---------------------------------------------------
+
+1. Register New Patient
+2. Search Patient
+3. Schedule Appointment
+4. Return to main menu
+
+Enter your selection: 3
+Enter the mobile number of patient: 7059945294
+
+Name: Test New
+DOB: 2005-05-15
+Address: 123 New, Abad
+Phone No.: 7059945294
+e-Mail: testnew@test.com
+
+Doctors:
+1. Dr. Batra, M.B.B.S., Available: Tue, Thu
+2. Dr. Reddy, M.D., Available: Mon, Fri
+
+Enter the index number of doctor to select them for appointment: 2
+
+Enter Date (yyyy-mm-dd): 2024-04-05
+
+Enter time for the appointment (HH:MM):13:00
+Appointment Scheduled Successfully!
+
+---------------------------------------------------
+PATIENT MENU
+---------------------------------------------------
+
+1. Register New Patient
+2. Search Patient
+3. Schedule Appointment
+4. Return to main menu
+
+Enter your selection: 2
+Enter the mobile number of patient: 7059945294
+
+---------------------------------------------------
+Patient Details:
+
+Name: Test New
+DOB: 2005-05-15
+Address: 123 New, Abad
+Phone No.: 7059945294
+e-Mail: testnew@test.com
+---------------------------------------------------
+
+---------------------------------------------------
+APPOINTMENTS
+---------------------------------------------------
+
+Name: Test New
+Doctor: Dr. Reddy
+Date: 2024-04-05
+Time: 13:00:00
+
+---------------------------------------------------

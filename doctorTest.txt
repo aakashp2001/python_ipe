@@ -1,0 +1,110 @@
+
+---------------------------------------------------
+MAIN MENU
+---------------------------------------------------
+
+1. Patient
+2. Doctor
+3. Exit
+
+Choose the data you want to work with: 2
+
+---------------------------------------------------
+DOCTOR MENU
+---------------------------------------------------
+
+1. Register New Doctor
+2. Display All Doctors
+3. Return to main menu
+
+Enter your selection: 2
+
+---------------------------------------------------
+DOCTORS
+---------------------------------------------------
+
+1.
+Name: Dr. Batra
+Doctor Qualification: M.B.B.S.
+Availability: Tue, Thu
+Phone No.: 7016235353
+
+
+2.
+Name: Dr. Reddy
+Doctor Qualification: M.D.
+Availability: Mon, Fri
+Phone No.: 9427953145
+
+---------------------------------------------------
+
+---------------------------------------------------
+DOCTOR MENU
+---------------------------------------------------
+
+1. Register New Doctor
+2. Display All Doctors
+3. Return to main menu
+
+Enter your selection: 1
+Enter name of doctor: Dr. Rajvadia
+Enter qualification: B.H.M.S
+Enter Availability(Mon, Tue, Wed, Thu, Fri, Sat, Sun): Wed, Sat
+Enter valid 10-digit Mobile number containing only digits: 9470049170
+Record Added Successfully!
+
+---------------------------------------------------
+DOCTOR MENU
+---------------------------------------------------
+
+1. Register New Doctor
+2. Display All Doctors
+3. Return to main menu
+
+Enter your selection: 2
+
+---------------------------------------------------
+DOCTORS
+---------------------------------------------------
+
+1.
+Name: Dr. Batra
+Doctor Qualification: M.B.B.S.
+Availability: Tue, Thu
+Phone No.: 7016235353
+
+
+2.
+Name: Dr. Reddy
+Doctor Qualification: M.D.
+Availability: Mon, Fri
+Phone No.: 9427953145
+
+
+3.
+Name: Dr. Rajvadia
+Doctor Qualification: B.H.M.S
+Availability: Wed, Sat
+Phone No.: 9470049170
+
+---------------------------------------------------
+
+---------------------------------------------------
+DOCTOR MENU
+---------------------------------------------------
+
+1. Register New Doctor
+2. Display All Doctors
+3. Return to main menu
+
+Enter your selection: 3
+
+---------------------------------------------------
+MAIN MENU
+---------------------------------------------------
+
+1. Patient
+2. Doctor
+3. Exit
+
+Choose the data you want to work with: 3
